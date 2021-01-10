@@ -52,7 +52,8 @@ model.load_weights('./model_weights/model.h5')
 
 cam = cv2.VideoCapture(0) #getting camera for video capturing
 face_detector = cv2.CascadeClassifier(
-    './face_detector/haarcascade_frontalface_default.xml') # default face detector, ref: https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_default.xml
+    './face_detector/haarcascade_frontalface_default.xml') # default face detector, ref: 
+    #https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_default.xml
 
 mapping = {0: 'anger', 1: 'contempt', 2: 'disgust',
            3: 'fear', 4: 'happy', 5: 'neutral',
