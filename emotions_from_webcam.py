@@ -48,11 +48,12 @@ model = Sequential([
     Dense(9, activation='softmax') # we've trained to predict 9 emotions
 ])
 
-model.load_weights('./model/model.h5')
+model.load_weights('./model_weights/model.h5')
 
 cam = cv2.VideoCapture(0) #getting camera for video capturing
 face_detector = cv2.CascadeClassifier(
     './face_detector/haarcascade_frontalface_default.xml') # default face detector, ref: https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_default.xml
+
 mapping = {0: 'anger', 1: 'contempt', 2: 'disgust',
            3: 'fear', 4: 'happy', 5: 'neutral',
            6: 'sad', 7: 'surprise', 8: 'uncertain'} # classes to emotions mapping

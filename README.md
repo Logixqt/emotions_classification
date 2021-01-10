@@ -2,10 +2,10 @@
 
 This is the final project at Skillbox "Data Scientist" course. The task is to train 
 an emotion classification model on a dataset of 50 000 labeled images. The results are evaluated 
-at Kaggle on 5 000 test images (more detailes regarding the data can be found 
-[here](https://www.kaggle.com/c/skillbox-computer-vision-project/overview)). 
-Should the model achieve over 0.4 `categorization accuracy` metric 
-the model is to be used to classify emotions of people via webcam. 
+at Kaggle on 5 000 test images (more detailes regarding the data can be found at 
+[the competition page](https://www.kaggle.com/c/skillbox-computer-vision-project/overview)). 
+Should the model achieve over 0.4 `categorization accuracy`, 
+it is to be used to classify emotions of people via webcam. 
 
 While looking for the best model, I tried different pipelines, using EfficientNet as the 
 classifier, starting with direct training, further implementing imagenet weights initialization 
