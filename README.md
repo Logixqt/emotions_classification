@@ -5,7 +5,7 @@ an emotion classification model on a dataset of 50 000 labeled images. The resul
 at Kaggle on 5 000 test images (more detailes regarding the data can be found at 
 [the competition page](https://www.kaggle.com/c/skillbox-computer-vision-project/overview)). 
 Here are some examples of the images: 
-![samples](https://github.com/Logixqt/emotions_classification/blob/master/examples/samples.png)\
+![samples](https://github.com/Logixqt/emotions_classification/blob/main/examples/samples.PNG)\
 Should the model achieve over 0.4 `categorization accuracy`, 
 it is to be used to classify emotions of people via webcam. 
 
