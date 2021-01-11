@@ -23,7 +23,7 @@ process is also availiable as a script `model_training.py`.
 
 The real-time emotions classification using webcam video is realized at `emotions_from_webcam.py` file. 
 I use open-cv library to both read webcam and detect faces, then the faces' pictures are given to the 
-trained model and the real-time predictions go along with the video. Here is the example*: 
-![samples](https://github.com/Logixqt/emotions_classification/blob/main/examples/video_example.mp4)\
+trained model and the real-time predictions go along with the video. Here you can watch a  
+![video_ example*](https://github.com/Logixqt/emotions_classification/blob/main/examples/video_example.mp4)\
 *the script was run on poor hardware with no GPU, that's why the speed is low. Free Collab's inference time 
 is 32 ms (78 ms with a flip TTA), with is quite enough for .
