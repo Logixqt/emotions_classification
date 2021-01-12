@@ -26,7 +26,7 @@ train_df, val_df = train_test_split(train_df, test_size=0.1, random_state=SEED)
 # this split is made only for validation part extraction, we have a test set 
 # to evaluate our model on via Kaggle
 
-# now we create a data_generator adding some augmentations for training
+# now we create data_generators adding some augmentations for training
 # which helped to improve generalization power of the model
 train_data_gen = tf.keras.preprocessing.image.ImageDataGenerator(
                                     horizontal_flip=True, rotation_range=15, 
@@ -49,12 +49,12 @@ test_data = test_data_gen.flow_from_dataframe(
 
 MAPPING = {k: i for i, k in train_data.class_indices.items()} # to decode predictions
 
-# I wrote a child class of Sequential just adding a TTA prediction method
-# which averages the predictions on base image and it's flipped copy
+# I wrote a child class of tf.keras.Sequential just adding a TTA prediction 
+# method which averages the predictions on base image and it's flipped copy
 class MySequential(tf.keras.Sequential):
     def predict_tta(self, data_generator):
         tta_preds = []
-        i = 0 # for counter
+        i = 0 # counter
         images_count = data_generator.n # to be able to stop the loop
         for curr_im_batch in data_generator:
             for curr_img in curr_im_batch:
@@ -66,6 +66,7 @@ class MySequential(tf.keras.Sequential):
                 i += 1 # for process monitoring
                 if i % 1000 == 0:
                     print(f'{i}/{images_count} images processed')
+            
             # now we check whether it's time to stop the loop
             # otherwise we will iterate the generator forever
             if i == images_count:
