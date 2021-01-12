@@ -6,9 +6,16 @@ import tensorflow.keras.applications.efficientnet as efn
 
 EFNETS = (efn.EfficientNetB0, efn.EfficientNetB1, efn.EfficientNetB2, efn.EfficientNetB3, 
           efn.EfficientNetB4, efn.EfficientNetB5, efn.EfficientNetB6, efn.EfficientNetB7)
+IMSIZES = (224, 240, 260, 300, 380, 456, 528, 600)
+# made for convenience, EFNETS[i] corresponds to EfficientNetBi
+# and IMSIZES[i] corresponds to EfficientNetBi Input image size
 
-N_CLASSES = 9
-SEED = 17
+EFNET_NO = 1 # EfficientNetB1 performed the best
+BATCH_SIZE = 64
+IMAGE_SIZE = IMSIZES[EFNET_NO]
+
+N_CLASSES = 9 # we have 9 emotions to predict
+SEED = 17 # just for train_test_split, where I define validation dataset
 IMAGES_DIR = '/kaggle/input/skillbox-emotions/'
 TEST_DIR = IMAGES_DIR + '/test_kaggle'
 
@@ -16,17 +23,16 @@ train_df = pd.read_csv('/kaggle/input/skillbox-computer-vision-project/train.csv
 sub = pd.read_csv('/kaggle/input/skillbox-computer-vision-project/sample_submission.csv')
 
 train_df, val_df = train_test_split(train_df, test_size=0.1, random_state=SEED)
+# this split is made only for validation part extraction, we have a test set 
+# to evaluate our model on via Kaggle
 
+# now we create a data_generator adding some augmentations for training
+# which helped to improve generalization power of the model
 train_data_gen = tf.keras.preprocessing.image.ImageDataGenerator(
                                     horizontal_flip=True, rotation_range=15, 
                                     width_shift_range=0.15, height_shift_range=0.15)
 val_data_gen = tf.keras.preprocessing.image.ImageDataGenerator()
 test_data_gen = tf.keras.preprocessing.image.ImageDataGenerator()
-
-EFNET_NO = 1
-BATCH_SIZE = 64
-IMSIZES = (224, 240, 260, 300, 380, 456, 528, 600)
-IMAGE_SIZE = IMSIZES[EFNET_NO]
 
 train_data = train_data_gen.flow_from_dataframe(
               train_df, directory=IMAGES_DIR, x_col='image_path', y_col='emotion', class_mode='sparse',
@@ -41,13 +47,15 @@ test_data = test_data_gen.flow_from_dataframe(
               target_size=(IMAGE_SIZE, IMAGE_SIZE), batch_size=BATCH_SIZE, shuffle=False
           )
 
-MAPPING = {k: i for i, k in train_data.class_indices.items()}
+MAPPING = {k: i for i, k in train_data.class_indices.items()} # to decode predictions
 
+# I wrote a child class of Sequential just adding a TTA prediction method
+# which averages the predictions on base image and it's flipped copy
 class MySequential(tf.keras.Sequential):
     def predict_tta(self, data_generator):
         tta_preds = []
-        i = 0
-        images_count = data_generator.n
+        i = 0 # for counter
+        images_count = data_generator.n # to be able to stop the loop
         for curr_im_batch in data_generator:
             for curr_img in curr_im_batch:
                 pred = self.predict(curr_img[None, ...])
@@ -55,16 +63,18 @@ class MySequential(tf.keras.Sequential):
                 tta_pred = np.stack((pred, pred_f)).mean(axis=0)[0]
                 tta_preds.append(tta_pred)
                 
-                i += 1
+                i += 1 # for process monitoring
                 if i % 1000 == 0:
                     print(f'{i}/{images_count} images processed')
-                
+            # now we check whether it's time to stop the loop
+            # otherwise we will iterate the generator forever
             if i == images_count:
                 print('Done')
                 break
             
         return np.array(tta_preds)
     
+# defining the model with imagenet weights makes the training process faster
 model = MySequential([
     EFNETS[EFNET_NO](
         input_shape=(IMAGE_SIZE, IMAGE_SIZE, 3),
