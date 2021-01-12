@@ -28,10 +28,12 @@ trained model and the real-time predictions go along with the video. Here you ca
 *the script was run on poor hardware with no GPU, that's why fps is low. Free Collab's inference time 
 is 32 ms (78 ms with a flip TTA), which is quite enough for high quality videos.
 
-## How to run the code at your hardware
+## How to run the code
 1. Install the necessary libraries: 
 >open-cv (4.4.0)
+
 >numpy (1.18.5)
+
 >tensorflow (2.3.1)
 2. Download `emotions_from_webcam.py`, `face_detector/haarcascade_frontalface_default.xml` and 
 `model_weights/model.h5` files
