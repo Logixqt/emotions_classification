@@ -27,3 +27,15 @@ trained model and the real-time predictions go along with the video. Here you ca
 ![video_ example*](https://github.com/Logixqt/emotions_classification/blob/main/examples/video_example.mp4)\
 *the script was run on poor hardware with no GPU, that's why fps is low. Free Collab's inference time 
 is 32 ms (78 ms with a flip TTA), which is quite enough for high quality videos.
+
+## How to run the code at your hardware
+1. Install the necessary libraries: 
+>open-cv (4.4.0)
+>numpy (1.18.5)
+>tensorflow (2.3.1)
+2. Download `emotions_from_webcam.py`, `face_detector/haarcascade_frontalface_default.xml` and 
+`model_weights/model.h5` files
+3. Either maintain the files structure the same or write full path to `haarcascade_frontalface_default.xml` 
+and `model.h5` in .py script (`MODEL_WEIGHTS_PATH`, `DETECTOR_PATH` variables)
+4. Run `emotions_from_webcam.py` file
+5. Press `q` to cancel run

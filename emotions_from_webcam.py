@@ -7,6 +7,11 @@ from tensorflow.keras.layers import GlobalAveragePooling2D
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.preprocessing.image import smart_resize
 
+MODEL_WEIGHTS_PATH = './model_weights/model.h5'
+DETECTOR_PATH = './face_detector/haarcascade_frontalface_default.xml'
+# default face detector, ref: 
+# https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_default.xml
+
 def predict_draw_emotion(img, face):
     """
     Predicts emotion for the face at the image and draws the bounding box with emotion on the image.
@@ -48,12 +53,10 @@ model = Sequential([
     Dense(9, activation='softmax') # we've trained to predict 9 emotions
 ])
 
-model.load_weights('./model_weights/model.h5')
+model.load_weights(MODEL_WEIGHTS_PATH)
 
 cam = cv2.VideoCapture(0) #getting camera for video capturing
-face_detector = cv2.CascadeClassifier(
-    './face_detector/haarcascade_frontalface_default.xml') # default face detector, ref: 
-    #https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_default.xml
+face_detector = cv2.CascadeClassifier(DETECTOR_PATH)
 
 mapping = {0: 'anger', 1: 'contempt', 2: 'disgust',
            3: 'fear', 4: 'happy', 5: 'neutral',
