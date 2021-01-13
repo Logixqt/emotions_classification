@@ -30,9 +30,7 @@ is 32 ms (78 ms with a flip TTA), which is quite enough for high quality videos.
 
 ## How to run the code
 1. Install the necessary libraries: 
->tensorflow (2.3.1)
-
->open-cv (4.4.0)
+>tensorflow (2.3.1), open-cv (4.4.0), numpy (1.18.5), pandas (1.0.5)
 
 2. Download `emotions_from_webcam.py`, `face_detector/haarcascade_frontalface_default.xml` and 
 `model_weights/model.h5` files
