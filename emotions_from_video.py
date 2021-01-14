@@ -12,6 +12,13 @@ from tensorflow.keras.preprocessing.image import smart_resize
 import moviepy.editor as mpe
 import time
 
+VIDEO_PATH = 'C:/Users/mbabaev/Desktop/ML_projects/Skillbox/diploma_neural/bril_hand.mp4'
+MODEL_WEIGHTS_PATH = 'C:/Users/mbabaev/Desktop/ML_projects/Skillbox/diploma_neural/model/model.h5'
+DETECTOR_PATH = 'C:/Users/mbabaev/Desktop/ML_projects/Skillbox/diploma_neural/face_detector/haarcascade_frontalface_default.xml' 
+# default face detector
+# ref: https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_default.xml
+
+
 # Defining the trained model and loading our weights
 model = Sequential([
     EfficientNetB1(
@@ -22,12 +29,7 @@ model = Sequential([
     Dense(9, activation='softmax') # we've trained to predict 9 emotions
 ])
 
-model.load_weights('C:/Users/mbabaev/Desktop/ML_projects/Skillbox/diploma_neural/model/model.h5')
-
-VIDEO_PATH = 'C:/Users/mbabaev/Desktop/ML_projects/Skillbox/diploma_neural/bril_hand.mp4'
-DETECTOR_PATH = 'C:/Users/mbabaev/Desktop/ML_projects/Skillbox/diploma_neural/face_detector/haarcascade_frontalface_default.xml' 
-# default face detector
-# ref: https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_default.xml
+model.load_weights(MODEL_WEIGHTS_PATH)
 
 MAPPING = {0: 'anger', 1: 'contempt', 2: 'disgust',
            3: 'fear', 4: 'happy', 5: 'neutral',
