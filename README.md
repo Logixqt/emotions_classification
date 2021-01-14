@@ -35,7 +35,6 @@ and the corresponding
 ## How to run the webcam real-time emotions recognition
 1. Install the necessary libraries: 
 >tensorflow (2.3.1), open-cv (4.4.0), numpy (1.18.5)
-
 2. Download `emotions_from_webcam.py`, `face_detector/haarcascade_frontalface_default.xml` and 
 `model_weights/model.h5` files
 3. Either maintain the files structure the same or write full path to `haarcascade_frontalface_default.xml` 
@@ -46,10 +45,10 @@ and `model.h5` in .py script (`MODEL_WEIGHTS_PATH`, `DETECTOR_PATH` variables)
 ## How to run the video analysis
 1. Install the necessary libraries: 
 >tensorflow (2.3.1), open-cv (4.4.0), numpy (1.18.5), pandas (1.0.5), moviepy (1.0.3)
-
 2. Download `emotions_from_video.py`, `face_detector/haarcascade_frontalface_default.xml` and 
 `model_weights/model.h5` files
 3. Write the full path to `haarcascade_frontalface_default.xml`, `model.h5` and the video you want to process 
 in .py script (`MODEL_WEIGHTS_PATH`, `DETECTOR_PATH`, `VIDEO_PATH` variables)
 4. Run `emotions_from_video.py`
+
 You may read the functions description for more options
