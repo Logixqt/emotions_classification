@@ -130,6 +130,7 @@ def analyse_video(video_path, classifier, detector_path, compact=True,
             if show_process:
                 cv2.imshow("video analysis process", rgb_frame[:,:,::-1])
         
+    # closing the objects
     cap.release()
     writer.release()
     cv2.destroyAllWindows()
