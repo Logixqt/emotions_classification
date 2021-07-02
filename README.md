@@ -1,7 +1,6 @@
 # Emotions classification
 
-This is the final project at Skillbox "Data Scientist" course. The task is to train 
-an emotion classification model on a dataset of 50 000 labeled images with 9 classes. The results 
+The goal of this project is to train an emotion classification model on a dataset of 50 000 labeled images with 9 classes. The results 
 are evaluated at Kaggle on 5 000 test images (more detailes regarding the data can be found at 
 [the competition page](https://www.kaggle.com/c/skillbox-computer-vision-project/overview)). 
 Here are some examples of the images: 
