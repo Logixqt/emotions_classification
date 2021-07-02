@@ -4,6 +4,7 @@ The goal of this project is to train an emotion classification model on a datase
 are evaluated at Kaggle on 5 000 test images (more detailes regarding the data can be found at 
 [the competition page](https://www.kaggle.com/c/skillbox-computer-vision-project/overview)). 
 Here are some examples of the images: 
+
 ![samples](https://github.com/Logixqt/emotions_classification/blob/main/examples/samples.PNG)\
 Should the model achieve over 0.4 `categorization accuracy`, 
 it is to be used to classify people's emotions in real-time via webcam. 
